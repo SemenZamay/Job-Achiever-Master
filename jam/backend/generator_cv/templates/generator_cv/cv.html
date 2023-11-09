@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>CV</title>
+	<style>
+		.page-content {
+			max-width: 1000px;
+			margin: 0 auto;
+		}
+	</style>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+	<div class="container-fluid page-content">
+		<table class="table table-borderless">
+			<tbody>
+				<tr>
+					<td rowspan="2">
+						<div style="width: 200px; height: 200px; overflow: hidden; border-radius: 50%;">
+							{% if picture != "" %}
+							<img src="{{ picture }}" class="img-fluid"></img>
+							{% endif %}
+						</div>
+					</td>
+					<td>
+						<h2>{{ first_name }}</h2>
+						<h1>{{ last_name }}</h1>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p>Date of bith: {{ birthday }}</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<h3>Details</h3>
+						<p><i class="fa-solid fa-location-dot"></i> <b>Adress</b><br>{{ address|linebreaks }}</p>
+						<p><i class="fa-solid fa-phone"></i> <b>Phone</b><br>{{ phone }}</p>
+						<p><i class="fa-solid fa-envelope"></i> <b>Email</b><br>{{ email }}</p>
+						{% if portfolio != None and portfolio != "" %}
+						<p><i class="fa-regular fa-folder-open"></i> <b>Portfolio</b><br>{{ portfolio }}</p>
+						{% endif %}
+						{% if facebook != None and facebook != "" %}
+						<p><i class="fa-brands fa-facebook"></i> <b>Facebook</b><br>{{ facebook }}</p>
+						{% endif %}
+						<h3 class="pt-3">Skills</h3>
+						<p>
+							{% for skill in skills %}
+							<i class="fa-solid fa-code-commit"></i> {{ skill }}<br>
+							{% endfor %}</p>
+						<h3 class="pt-3">Hobbies</h3>
+						<p>{% for hobby in hobbies %}
+							<i class="fa-solid fa-code-commit"></i> {{ hobby }}<br>
+							{% endfor %}
+						</p>
+						<h3 class="pt-3">Languages</h3>
+						<p>
+							{% for language in languages %}
+							<i class="fa-solid fa-code-commit"></i> {{ language }}<br>
+							{% endfor %}</p>
+					</td>
+					<td>
+						<h3>Profile</h3>
+						<p>{{ description }}</p>
+						<h3 class="pt-3 pb-1">Employment History</h3>
+						{% for i in experiences %}
+						<p><b>{{ i.title }}</b> - from {{ i.start_date|date:"d.m.Y" }} to {{ i.end_date|date:"d.m.Y" }}<br>
+							<b>{{ i.company }}</b><br>
+						{{ i.description|linebreaks }}</p>
+						{% endfor %}
+						<h3 class="pt-3 pb-1">Education</h3>
+						{% for i in educations %}
+						<p><b>{{ i.title }}</b> - from {{ i.start_date|date:"d.m.Y" }} to {{ i.end_date|date:"d.m.Y" }}<br>
+							<b>{{ i.school }}</b><br>
+						{{ i.description|linebreaks }}</p>
+						{% endfor %}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="text-center">
+						Written on {{ date }}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>
